@@ -2,7 +2,7 @@
 
 use CodeIgniter\Model;
 
-class Login extends Model{
+class AuthModel extends Model{
 
 	public function getData()
 	{
@@ -11,13 +11,11 @@ class Login extends Model{
         return $builder->get()->getResult();
 	}
 
-    public function login($data)
+    public function checkData($username, $password)
     {
         $db = \Config\Database::connect();
         $builder = $db->table("petugas");
-        $builder->where("nama_petugas",$data['nama_petugas']);
-        $builder->where("password",$data['password']);
-        return $builder->get();
+        return $builder->getWhere(['nama_petugas'=>$username,'password'=>$password])->getRow();
     }
 
 	public function register($data)

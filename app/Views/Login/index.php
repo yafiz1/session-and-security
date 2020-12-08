@@ -9,22 +9,18 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 </head>
 <body>
+
 	<?php 
-
-		if (isset($auth)) {
-			if ($auth == 1) {
-				echo "<script>document.location.href='".base_url()."/Perpustakaan/anggota'</script>";
-			}else{
-				echo "gagal";
-			}
+		$session = session();
+		if ($session->get('msg')) {
+			echo "<script>alert('".$session->get('msg')."');</script>";
 		}
-
 
 	 ?>
 	<div class="bg-light text-dark" style="width:28%; margin: 180px auto; padding: 35px; box-sizing: border-box; text-align: center; border-radius: 3px; border: solid black 1px;">
 		<div style="font-size: 25px;  font-family: Arial;">Login</div>
 		<br>
-		<?= form_open(base_url()."/login/login") ?>
+		<?= form_open(base_url()."/login/auth") ?>
 			<div class="form-group">
 				<input type="text" class="form-control" name="username" placeholder="Username" style="margin-top: width: 80%;">
 			</div>
@@ -34,7 +30,7 @@
 			
 			<button type="submit" class="btn btn-primary" style="width: 100%; border-radius: 3px;">Sign in</button>
 		</form>
-		<div style="margin-top: 30px;"><a href="<?= base_url()."/login/register" ?>">Don't have an account? Register</a></div>
+		<div style="margin-top: 30px;"><a href="<?= base_url()."/login/registerView" ?>">Don't have an account? Register</a></div>
 		
 	</div>
 </body>

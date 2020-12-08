@@ -18,26 +18,39 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<?= base_url(); ?>/perpustakaan/anggota">Anggota</a></li>
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<?= base_url(); ?>/perpustakaan/buku">Buku</a></li>
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<?= base_url(); ?>/perpustakaan/petugas">Petugas</a></li>
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<?= base_url(); ?>/perpustakaan/peminjaman">Peminjaman</a></li>
+                <?php if (session()->get('jabatan') == 'pustakawan'):?>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<?= base_url(); ?>/perpustakaan/anggota">Anggota</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<?= base_url(); ?>/perpustakaan/buku">Buku</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<?= base_url(); ?>/perpustakaan/peminjaman">Peminjaman</a></li>
+                <?php elseif (session()->get('jabatan' == 'kepala')):?>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<?= base_url(); ?>/perpustakaan/petugas">Petugas</a></li>
+                <?php endif; ?>
             </ul>
         </div>
     </nav>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">
-            <span class="d-block d-lg-none">Clarence Taylor</span>
-            <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" width="50" src="<?php echo base_url('') ?>" alt="" /></span>
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<?= base_url(); ?>/perpustakaan/anggota">Anggota</a></li>
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<?= base_url(); ?>/perpustakaan/buku">Buku</a></li>
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<?= base_url(); ?>/perpustakaan/petugas">Petugas</a></li>
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<?= base_url(); ?>/perpustakaan/peminjaman">Peminjaman</a></li>
-            </ul>
+        <div class="container-fluid">
+            
+            <a class="navbar-brand js-scroll-trigger" href="#page-top">
+                <span class="d-block d-lg-none">Clarence Taylor</span>
+                <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" width="50" src="<?php echo base_url('') ?>" alt="" /></span>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+                    <?php if (session()->get('jabatan') == 'pustakawan'):?>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<?= base_url(); ?>/perpustakaan/anggota">Anggota</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<?= base_url(); ?>/perpustakaan/buku">Buku</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<?= base_url(); ?>/perpustakaan/peminjaman">Peminjaman</a></li>
+                    <?php elseif (session()->get('jabatan' == 'kepala')):?>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<?= base_url(); ?>/perpustakaan/petugas">Petugas</a></li>
+                    <?php endif; ?>
+                </ul>
+
+                 <span class="form-inline my-2 my-lg-0">
+                    <a href="/Login/logout" style="text-decoration: none; color: white;"><b>Logout</b></a>
+                </span>
+            </div>
         </div>
     </nav>
     <div class="container-fluid p-0 mt-4">

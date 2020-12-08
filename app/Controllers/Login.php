@@ -1,41 +1,50 @@
 <?php namespace App\Controllers;
 
+use App\Models\AuthModel;
+
 class Login extends BaseController
 {
-	public function index()
+	public function __construct()
 	{
 		helper('form');
+	}
+	public function index()
+	{
 		return view('Login/index.php');
 	}
 
-	public function register()
+	public function registerView()
 	{
-		helper('form');
 		return view('Login/register.php');
 	}
 
-	public function Login()
+	public function auth()
 	{
-		helper('form');
-		$model = model('Login');
-		$data = [
-			'nama_petugas' => $this->request->getPost('username'),
-			'password' => sha1($this->request->getPost('password'))
-		];
-		$res = $model->login($data);
-		if ($res->connID->affected_rows == 1) {
-			$data = ['auth' => 1];
-			return view('Login/index.php', $data);
+		$model = new AuthModel;
+
+		$username = $this->request->getPost('username');
+		$password = $this->request->getPost('password');
+
+		$data = $model->checkData($username, sha1($password));
+		
+		$session = session();
+		if ($data) {
+			$sessdata = [
+				'username' => $data->nama_petugas,
+				'logged_in' => TRUE,
+				'jabatan' => $data->jabatan
+			];
+			$session->set($sessdata);
+			return redirect()->to('/Perpustakaan');
 		}else{
-			$data = ['auth' => 0];
-			return view('Login/register.php', $data);
+			$session->setFlashdata('msg','Username/password salah');
+			return redirect()->to('/Login');
 		}
 	}
 
 	public function registerAccount()
 	{
-		helper('form');
-		$model = model('Login');
+		$model = new AuthModel;
 		$data = [
 			'nama_petugas' => $this->request->getPost('username'),
 			'jabatan' => "pustakawan",
@@ -43,10 +52,17 @@ class Login extends BaseController
 		];
 		$res = $model->register($data);
 		if ($res->connID->affected_rows == 1) {
-			return view('Login/index.php');
+			return redirect()->to('/Login');
 		}else{
-			return view('Login/register.php');
+			return redirect()->to('/Login/registerView');
 		}
+	}
+
+	public function logout()
+	{
+		$session = session();
+		$session->destroy();
+		return redirect()->to('/Login');
 	}
 
 	//--------------------------------------------------------------------

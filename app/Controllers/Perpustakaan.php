@@ -10,8 +10,10 @@ class Perpustakaan extends BaseController
 		helper('form');
 	}
 
-	public function index($method = 'anggota')
+	public function index($method = '')
 	{
+		
+
 		if ($method == 'anggota')
 			return $this->anggota();
 		else if ($method == 'buku')
@@ -20,6 +22,14 @@ class Perpustakaan extends BaseController
 			return $this->petugas();
 		else if ($method == 'peminjaman')
 			return $this->peminjaman();
+		else {
+			$data = [
+				'title' => 'Dashboard',
+				'content' => 'perpustakaan/v_grid_dashboard'
+			];
+
+			return view('template', $data);
+		}
 		
 	}
 
