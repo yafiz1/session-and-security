@@ -55,7 +55,8 @@ class Perpustakaan extends BaseController
 		}else if ($param == 'petugas') {
 			 $data = array(
 				'nama_petugas' => $this->request->getPost('nama_petugas'),
-				'jabatan' => $this->request->getPost('jabatan')
+				'jabatan' => $this->request->getPost('jabatan'),
+				'password' => sha1($this->request->getPost('password'))
 			);
 			$id_field = "id_petugas";
 		}else if ($param == 'peminjaman') {
@@ -161,7 +162,7 @@ class Perpustakaan extends BaseController
 		return view('template', $data);
 	}
 
-	public function petugas($param = "", $id = "", $nama_petugas = "", $jabatan = "")
+	public function petugas($param = "", $id = "", $nama_petugas = "", $jabatan = "", $password = "")
 	{
 		$model = new PerpustakaanModel("petugas");
 
@@ -176,7 +177,8 @@ class Perpustakaan extends BaseController
 				'data' => [
 					"id" => $id,
 					'nama_petugas' => $nama_petugas,
-					'jabatan' => $jabatan
+					'jabatan' => $jabatan,
+					'password' => $password
 				]
 			];
 		}else if ($param == 'edit') {
@@ -186,7 +188,8 @@ class Perpustakaan extends BaseController
 				'data' => [
 					"id" => $id,
 					'nama_petugas' => $nama_petugas,
-					'jabatan' => $jabatan
+					'jabatan' => $jabatan,
+					'password' => $password
 				]
 			];
 		}else{

@@ -12,7 +12,16 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Jabatan</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="jabatan" autocomplete="off" value="<?= $data['jabatan'] ?>">
+                    <select class="form-control" name="jabatan">
+                        <option value="pustakawan" <?= $data['jabatan'] == "pustakawan" ? 'selected' : '' ?>>Pustakawan</option>
+                        <option value="kepala" <?= $data['jabatan'] == "kepala" ? 'selected' : '' ?>>Kepala</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Password</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" name="password" autocomplete="off">
                 </div>
             </div>
             <button type="submit" class="btn btn-primary mt-3">SIMPAN</button>

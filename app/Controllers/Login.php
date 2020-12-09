@@ -35,10 +35,10 @@ class Login extends BaseController
 				'jabatan' => $data->jabatan
 			];
 			$session->set($sessdata);
-			return redirect()->to('/Perpustakaan');
+			return redirect()->to(base_url().'/Perpustakaan');
 		}else{
 			$session->setFlashdata('msg','Username/password salah');
-			return redirect()->to('/Login');
+			return redirect()->to(base_url().'/Login');
 		}
 	}
 
@@ -52,9 +52,9 @@ class Login extends BaseController
 		];
 		$res = $model->register($data);
 		if ($res->connID->affected_rows == 1) {
-			return redirect()->to('/Login');
+			return redirect()->to(base_url().'/Login');
 		}else{
-			return redirect()->to('/Login/registerView');
+			return redirect()->to(base_url().'/Login/registerView');
 		}
 	}
 
@@ -62,7 +62,7 @@ class Login extends BaseController
 	{
 		$session = session();
 		$session->destroy();
-		return redirect()->to('/Login');
+		return redirect()->to(base_url().'/Login');
 	}
 
 	//--------------------------------------------------------------------

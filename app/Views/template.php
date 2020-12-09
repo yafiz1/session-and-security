@@ -48,7 +48,7 @@
                 </ul>
 
                  <span class="form-inline my-2 my-lg-0">
-                    <a href="/Login/logout" style="text-decoration: none; color: white;"><b>Logout</b></a>
+                    <a href="<?= base_url(); ?>/Login/logout" style="text-decoration: none; color: white;"><b>Logout</b></a>
                 </span>
             </div>
         </div>
